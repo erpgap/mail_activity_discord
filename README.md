@@ -52,3 +52,6 @@ Once configured, the module will automatically fetch activities from Odoo and se
 
 - Ensure your Discord bot has the necessary permissions to send messages to the specified channel and to create DM channels with users.
 - This module assumes that users' Discord handlers are stored in the `discord_handler` field in their user profile.
+
+![PROMPTEQUATION](mail_activity_discord/data/promptequation_logo.png)
+![ERPGAP](mail_activity_discord/data/erpgap_logo.png)
