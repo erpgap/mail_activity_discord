@@ -1,0 +1,40 @@
+<!-- views/res_config_settings_views.xml -->
+
+<!-- <odoo>
+    <record id="res_config_settings_view_form_discord" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.discord</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <form string="Settings">
+                <xpath expr="//div[@id='invite_users']/following-sibling::div[1]" position="after">
+                    <div id="discord_bot_settings" class="o_settings_container">
+                        <block title="Discord Bot Settings">
+                            <field name="discord_bot_token" placeholder="Enter Discord Bot Token"/>
+                            <field name="discord_channel_id" placeholder="Enter Discord Channel ID"/>
+                        </block>
+                    </div>
+                </xpath>
+            </form>
+        </field>
+    </record>
+</odoo> -->
+
+
+<!-- views/res_config_settings_views.xml -->
+<odoo>
+    <record id="res_config_settings_view_form_discord" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.discord</field>
+        <field name="model">res.config.settings</field>
+        <field name="arch" type="xml">
+            <form string="Settings">
+                <block title="Discord Bot Settings" name="users_discord_setting_container">
+                    <group string="Discord Bot Settings">
+                        <field name="discord_bot_token" placeholder="Enter Discord Bot Token"/>
+                        <field name="discord_channel_id" placeholder="Enter Discord Channel ID"/>
+                    </group>
+                </block>
+            </form>
+        </field>
+    </record>
+</odoo>

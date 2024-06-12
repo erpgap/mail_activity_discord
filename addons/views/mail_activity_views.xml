@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="mail_activity_type_view_form" model="ir.ui.view">
+        <field name="name">mail.activity.type.view.form</field>
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='activity_planning']" position="inside">
+                <field name="discord_connector"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+    
