@@ -8,7 +8,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class DiscordBot(models.Model):
+class DiscordBot(models.AbstractModel):
     _name = 'discord.bot'
     _description = 'Discord Bot'
 

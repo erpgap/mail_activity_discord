@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_activity_discord,access.mail.activity.discord,model_mail_activity,base.group_user,1,1,1,1
+access_discord_bot,access.discord.bot,model_discord_bot,base.group_user,1,1,1,1
+access_mail_activity_type,access.mail.activity.type,model_mail_activity_type,base.group_user,1,1,1,1
+access_res_config_settings,access.res.config.settings,model_res_config_settings,base.group_user,1,1,1,1
+access_res_users,access.res.users,model_res_users,base.group_user,1,1,1,1

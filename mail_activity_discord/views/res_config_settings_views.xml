@@ -1,0 +1,53 @@
+<!-- views/res_config_settings_views.xml -->
+<!-- <odoo>
+    <record id="res_config_settings_view_form_discord" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.discord</field>
+        <field name="model">res.config.settings</field>
+        <field name="arch" type="xml">
+            <div id="discord" position="after">
+                <div id="discord_settings_div_id">
+                <h2>Discord Settings</h2>
+                    <div class="row mtl6 o_settings_container" name="discord_setting_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="discord_setting">
+                            <div class="o_setting_right_pane">
+                                <div class="w-50">
+                                    <field name="discord_bot_token" placeholder="Enter Discord Bot Token"/>
+                                    <field name="discord_channel_id" placeholder="Enter Discord Channel ID"/>
+                                </div>
+                            </div>
+                        </div>
+                    </ div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo> -->
+
+
+<odoo>
+    <record id="res_config_settings_view_form_discord" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.discord</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='integration']" position="inside">
+                <setting string="Discord Connector Settings" id="user_discord_settings">
+                    <div class="content-group" id="discord_configuration_settings">
+                        <div class="mt16 row">
+                            <group>
+                            <!-- <label for="discord_bot_token" class="col-3 o_light_label">Discord Bot Token</label> -->
+                            <field name="discord_bot_token" placeholder="Enter Discord Bot Token" class="oe_inline"/>
+                            </group>
+                        </div>
+                        <div class="mt16 row">
+                            <group>
+                            <!-- <label for="discord_channel_id" class="col-3 o_light_label">Discord Channel ID</label> -->
+                            <field name="discord_channel_id" placeholder="Enter Discord Channel ID" class="oe_inline"/>
+                            </group>
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
