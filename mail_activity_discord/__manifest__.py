@@ -23,11 +23,11 @@
     'data': [
         #security
         'security/ir.model.access.csv',
-        'securiy/access_rights.xml',
         #data
         'data/ir_cron_data.xml',
         #views
         'views/res_config_settings_views.xml',
+        'views/res_users_views.xml',
         'views/mail_activity_views.xml'
     ],
 

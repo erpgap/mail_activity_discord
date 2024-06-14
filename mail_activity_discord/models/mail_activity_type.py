@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
+from odoo import models, fields
 import requests
 import json
-from odoo import models, fields
 
 class MailActivityType(models.Model):
     _inherit = 'mail.activity.type'
@@ -121,5 +120,4 @@ class MailActivity(models.Model):
         return (f"Activity: {activity.res_name}\n"
                 f"Type: {activity.activity_type_id.name}\n"
                 f"Deadline: {activity.date_deadline}\n"
-                f"Assigned to: {user_name}\n"
-                f"Discord User: {discord_user}")
+                f"Assigned to: {user_name}")

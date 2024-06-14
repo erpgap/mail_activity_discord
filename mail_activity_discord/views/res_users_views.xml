@@ -1,0 +1,24 @@
+<!-- views/res_config_settings_views.xml -->
+<odoo>
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='preferences']//group[@name='preferences']/label[@for='lang']" position="before"> 
+                <field name="discord_handler"/>
+            </xpath>
+        </field>
+    </record>    
+
+    <record id="view_users_form_simple_modif" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='preferences_page']/group[@name='preferences']//field[@name='tz_offset']" position="after">
+                <field name="discord_handler"/>
+            </xpath>
+        </field>
+    </record>    
+</odoo>
