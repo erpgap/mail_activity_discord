@@ -111,7 +111,14 @@ class MailActivity(models.Model):
         """
         user_name = activity.user_id.name if activity.user_id else 'Unassigned'
 
-        return (f"Activity: {activity.res_name}\n"
-                f"Type: {activity.activity_type_id.name}\n"
+        lead = self.env['crm.lead'].browse(activity.res_id)
+        lead_title = lead.name if lead else 'No Lead Title'
+
+        base_url = self.env['ir.config_parameter'].get_param('web.base.url')
+        lead_url = f"{base_url}/web#id={lead.id}&model=crm.lead"
+
+
+        return (f"Lead: {lead_title}\n"
+                f"Link: {lead_url}\n"
                 f"Deadline: {activity.date_deadline}\n"
-                f"Assigned to: {user_name}")
+        )
