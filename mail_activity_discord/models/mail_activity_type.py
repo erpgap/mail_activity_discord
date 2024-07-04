@@ -22,11 +22,10 @@ class MailActivity(models.Model):
             ('date_deadline', '<=', fields.Date.context_today(self))
         ]
 
-        # Retrieve the Discord bot token and channel ID from the settings
+        # Retrieve the Discord bot token from the settings
         discord_token = self.env['ir.config_parameter'].sudo().get_param('discord.bot.token')
-        channel_id = self.env['ir.config_parameter'].sudo().get_param('discord.channel.id')
 
-        if not discord_token or not channel_id:
+        if not discord_token:
             return
 
         # Fetch activities that need to be sent to Discord
@@ -36,8 +35,8 @@ class MailActivity(models.Model):
             user_ids = [activity.user_id.id for activity in activities if activity.user_id]
             # Fetch Discord handlers for these user IDs
             discord_handlers = self._fetch_discord_handlers(user_ids)
-            # Send messages to the Discord channel and direct messages to users
-            self._send_discord_messages(discord_token, channel_id, activities, discord_handlers)
+            # Send Discord direct messages to users
+            self._send_discord_messages(discord_token, activities, discord_handlers)
 
     def _fetch_discord_handlers(self, user_ids):
         """
@@ -48,12 +47,11 @@ class MailActivity(models.Model):
         # Create a dictionary mapping user IDs to their Discord handlers
         return {user.id: user.discord_handler for user in users}
 
-    def _send_discord_messages(self, discord_token, channel_id, activities, discord_handlers):
+    def _send_discord_messages(self, discord_token, activities, discord_handlers):
         """
-        Send messages to the Discord channel and direct messages to users.
+        Send direct messages to users.
         """
         headers = {"Authorization": f"Bot {discord_token}", "Content-Type": "application/json"}
-        base_url = f"https://discord.com/api/v9/channels/{channel_id}/messages"
 
         for activity in activities:
             discord_handler = discord_handlers.get(activity.user_id.id) if activity.user_id else None
@@ -62,20 +60,10 @@ class MailActivity(models.Model):
             if discord_handler:
                 message = f"{message}\n<@{discord_handler}>"
 
-            # Send the message to the specified Discord channel
-            self._post_message(base_url, headers, message)
-
             # Send a direct message to the user if they have a discord_handler set
             if discord_handler:
                 user_message = self._format_activity_message(activity, None)
                 self._send_direct_message(discord_token, discord_handler, user_message)
-
-    def _post_message(self, url, headers, message):
-        """
-        Post a message to the specified URL.
-        """
-        payload = {"content": message}
-        requests.post(url, headers=headers, data=json.dumps(payload))
 
     def _send_direct_message(self, discord_token, discord_handler, message):
         """
@@ -98,6 +86,13 @@ class MailActivity(models.Model):
             # Send the message to the DM channel
             self._post_message(f"https://discord.com/api/v9/channels/{dm_channel_id}/messages", headers, message)
 
+    def _post_message(self, url, headers, message):
+        """
+        Post a message to the specified URL.
+        """
+        payload = {"content": message}
+        requests.post(url, headers=headers, data=json.dumps(payload))
+
     def _get_discord_user_id(self, discord_token, discord_handler):
         """
         Get the Discord user ID from the handler.
@@ -115,7 +110,6 @@ class MailActivity(models.Model):
         Format the activity message to be sent to Discord.
         """
         user_name = activity.user_id.name if activity.user_id else 'Unassigned'
-        discord_user = discord_handler if discord_handler else 'Unassigned'
 
         return (f"Activity: {activity.res_name}\n"
                 f"Type: {activity.activity_type_id.name}\n"

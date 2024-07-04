@@ -14,14 +14,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 o_setting_box" id="discord_channel_id_settings">
-                    <div class="o_setting_right_pane">
-                        <label for="discord_channel_id"/>
-                        <div class="content-group">
-                            <field name="discord_channel_id" placeholder="Enter Discord Channel ID" class="oe_inline"/>
-                        </div>
-                    </div>
-                </div>
             </xpath>
         </field>
     </record>
