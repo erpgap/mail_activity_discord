@@ -29,7 +29,9 @@ class MailActivity(models.Model):
             return
 
         # Fetch activities that need to be sent to Discord
-        activities = self.search(domain)
+        activities = self.search(domain).filtered(
+            lambda a: hasattr(self.env[a.res_model], 'active') and self.env[a.res_model].browse(a.res_id).active or False)
+
         if activities:
             # Extract user IDs from the activities
             user_ids = [activity.user_id.id for activity in activities if activity.user_id]
